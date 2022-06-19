@@ -8,7 +8,7 @@ const meta = {
 
 const Home: NextPage = () => {
 	return (
-		<Content>
+		<div className="my-4 mx-auto flex w-full grow flex-col py-0 pr-[10%] pl-[5%]">
 			<SEO meta={meta} />
 			<p className="text-[clamp(1.25rem,_6vw,_3rem)] font-light leading-tight">
 				Hey there, I&apos;m
@@ -24,7 +24,7 @@ const Home: NextPage = () => {
 				Spending my free time rock climbing, wood working and learning
 				spanish.
 			</p>
-		</Content>
+		</div>
 	);
 };
 

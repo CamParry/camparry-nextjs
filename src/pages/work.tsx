@@ -10,7 +10,6 @@ const Work: NextPage = () => {
 	return (
 		<Content>
 			<SEO meta={meta} />
-			<PageTitle>My work</PageTitle>
 		</Content>
 	);
 };

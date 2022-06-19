@@ -5,7 +5,10 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
-import { SEO, Content, Post } from 'components';
+import { SEO, Content } from 'components';
+import { formatDate } from 'utils';
+import { MDXRemote } from 'next-mdx-remote';
+import { Code, Link } from 'components/MDX';
 
 type TProps = {
 	post: PostMDX;
@@ -17,10 +20,23 @@ const PostPage: NextPage<TProps> = ({ post }) => {
 		description: 'The portfolio of Cam Parry'
 	};
 
+	const components = {
+		code: Code,
+		a: (TProps: any) => <Link {...TProps} />
+	};
+
 	return (
 		<Content>
 			<SEO meta={meta} />
-			<Post post={post} />
+			<h1>{post.title}</h1>
+			<div className="pl-3 border-l-2 border-pink">
+				<p className="mt-4 text-sm">{formatDate(post.date)}</p>
+				<p className="mt-2 text-sm font-semibold">
+					{post.tags.join(', ')}
+				</p>
+			</div>
+			<hr />
+			<MDXRemote {...post.mdx} components={components} />
 		</Content>
 	);
 };
@@ -38,13 +54,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	};
 };
 
-export const getStaticProps: GetStaticProps = async (TProps) => {
-	const filename = `${TProps.params!.slug}.mdx`;
+export const getStaticProps: GetStaticProps = async (props) => {
+	const filename = `${props.params!.slug}.mdx`;
 	const source = fs.readFileSync(path.join('posts', filename), 'utf-8');
 	const { content, data } = matter(source);
 	const mdx = await serialize(content);
 	return {
-		TProps: {
+		props: {
 			post: {
 				title: data.title,
 				date: data.date,

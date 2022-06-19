@@ -6,4 +6,5 @@ export type TPost = {
 	excerpt: string;
 	tags: [string];
 	slug: string;
+	mdx?: MDXRemoteSerializeResult;
 };

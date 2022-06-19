@@ -3,7 +3,7 @@ import type { TPost } from 'types';
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { SEO, Content, PostList, PageTitle } from 'components';
+import { SEO, Content, PageTitle, PostItem } from 'components';
 
 type TProps = {
 	posts: TPost[];
@@ -18,8 +18,11 @@ const Blog: NextPage<TProps> = ({ posts }) => {
 	return (
 		<Content>
 			<SEO meta={meta} />
-			<PageTitle>Blog</PageTitle>
-			<PostList posts={posts} />
+			<div className="mx-auto my-12 w-[32rem] space-y-12">
+				{posts.map((post) => (
+					<PostItem post={post} />
+				))}
+			</div>
 		</Content>
 	);
 };
