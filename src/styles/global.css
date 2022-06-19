@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.icon {
+		vertical-align: middle;
+		height: 1em;
+		width: 1em;
+	}
+
+	.icon svg {
+		height: 1em;
+		width: 1em;
+		fill: currentColor;
+	}
+
+	.icon.block svg {
+		display: block;
+	}
+}
